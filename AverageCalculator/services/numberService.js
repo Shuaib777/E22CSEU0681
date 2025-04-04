@@ -18,11 +18,19 @@ const generateRandomNumbers = (count, min = 1, max = 100) => {
   );
 };
 
+const isPrime = (num) => {
+  if (num < 2) return false;
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false;
+  }
+  return true;
+};
+
 const generateRandomPrimes = async (count, min = 2, max = 100) => {
   let primes = [];
   while (primes.length < count) {
     const num = Math.floor(Math.random() * (max - min + 1)) + min;
-    if (num > 1 && primes.every((p) => num % p !== 0)) {
+    if (isPrime(num) && !primes.includes(num)) {
       primes.push(num);
     }
   }
@@ -62,13 +70,13 @@ const fetchNumbers = async (type) => {
   } catch (error) {
     switch (type) {
       case "p":
-        return await generateRandomPrimes(count);
+        return generateRandomPrimes(count);
       case "f":
-        return await generateRandomFibonacci(count);
+        return generateRandomFibonacci(count);
       case "e":
-        return await generateRandomEvenNumbers(count);
+        return generateRandomEvenNumbers(count);
       case "r":
-        return await generateRandomNumbers(count);
+        return generateRandomNumbers(count);
       default:
         return [];
     }

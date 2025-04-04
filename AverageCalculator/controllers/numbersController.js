@@ -5,7 +5,7 @@ const windowCurrentState = [];
 
 const getNumbers = async (req, res) => {
   const { type } = req.params;
-  console.log(type);
+  // console.log(type);
   const numbers = await fetchNumbers(type);
 
   // console.log(numbers);
