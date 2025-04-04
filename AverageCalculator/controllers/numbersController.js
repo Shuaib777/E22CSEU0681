@@ -8,6 +8,8 @@ const getNumbers = async (req, res) => {
   console.log(type);
   const numbers = await fetchNumbers(type);
 
+  // console.log(numbers);
+
   if (!numbers.length) {
     return res
       .status(500)
@@ -15,6 +17,7 @@ const getNumbers = async (req, res) => {
   }
 
   const newNumbers = numbers.filter((num) => !windowCurrentState.includes(num));
+  // console.log(newNumbers);
   const windowPrevState = [...windowCurrentState];
 
   windowCurrentState.push(...newNumbers);
@@ -31,7 +34,7 @@ const getNumbers = async (req, res) => {
   res.json({
     windowPrevState,
     windowCurrState: [...windowCurrentState],
-    numbers: newNumbers,
+    numbers: numbers,
     avg: avg.toFixed(2),
   });
 };
