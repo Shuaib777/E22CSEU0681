@@ -17,13 +17,12 @@ const getNumbers = async (req, res) => {
   const newNumbers = numbers.filter((num) => !windowCurrentState.includes(num));
   const windowPrevState = [...windowCurrentState];
 
-  if (windowCurrentState.length + newNumbers.length > WINDOW_SIZE) {
-    const excessCount =
-      windowCurrentState.length + newNumbers.length - WINDOW_SIZE;
-    windowCurrentState.splice(0, excessCount);
-  }
-
   windowCurrentState.push(...newNumbers);
+
+  // remove from start
+  while (windowCurrentState.length > WINDOW_SIZE) {
+    windowCurrentState.shift();
+  }
 
   const avg = windowCurrentState.length
     ? windowCurrentState.reduce((a, b) => a + b, 0) / windowCurrentState.length

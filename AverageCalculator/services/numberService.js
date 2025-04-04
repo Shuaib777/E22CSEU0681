@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const API_TOKEN = process.env.API_TOKEN;
+const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 const API_ENDPOINTS = {
   p: "http://20.244.56.144/evaluation-service/primes",
   f: "http://20.244.56.144/evaluation-service/fibonacci",
@@ -13,7 +13,7 @@ const fetchNumbers = async (type) => {
 
   try {
     const response = await axios.get(API_ENDPOINTS[type], {
-      headers: { Authorization: API_TOKEN },
+      headers: { Authorization: ACCESS_TOKEN },
       timeout: 500,
     });
 
